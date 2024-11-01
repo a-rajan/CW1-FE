@@ -1,0 +1,147 @@
+/* set full height and eliminate default margins */
+html,
+body {
+    height: 100%;
+    /* ensure the body takes the full height of the viewport */
+    margin: 0;
+    /* remove default margin */
+    display: flex;
+    /* use flexbox to center content */
+    justify-content: center;
+    /* center items horizontally */
+    align-items: center;
+    /* center items vertically */
+}
+
+/* background color and font styling */
+body {
+    font-family: Arial, sans-serif;
+    /* set the font for the body */
+    background-color: #f4f4f4;
+    /* light grey background */
+}
+
+/* styles for the main application container */
+#app {
+    background-color: white;
+    /* white background for the app */
+    padding: 20px;
+    /* space inside the container */
+    border-radius: 8px;
+    /* rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* subtle shadow for depth */
+    max-width: 400px;
+    /* limit the maximum width */
+    width: 100%;
+    /* allow full width on small screens */
+}
+
+/* styles for headings */
+h1,
+h2 {
+    color: #333;
+    /* dark grey color for text */
+    text-align: center;
+    /* center-align headings */
+}
+
+/* styling for the text input field */
+input[type="text"] {
+    width: calc(100% - 10px);
+    /* full width minus padding */
+    padding: 10px;
+    /* internal spacing */
+    margin-bottom: 10px;
+    /* space below the input field */
+    border: 1px solid #ccc;
+    /* light border */
+    border-radius: 4px;
+    /* slightly rounded edges */
+    font-size: 16px;
+    /* font size for the input text */
+}
+
+/* button styles */
+button {
+    width: 100%;
+    /* make the button full-width */
+    padding: 10px;
+    /* internal spacing */
+    background-color: #7F00FF;
+    /* primary color for button */
+    color: white;
+    /* text color */
+    border: none;
+    /* no border */
+    border-radius: 4px;
+    /* rounded corners */
+    cursor: pointer;
+    /* pointer cursor on hover */
+    font-size: 16px;
+    /* font size for button text */
+    transition: background-color 0.3s;
+    /* smooth background change on hover */
+}
+
+button:hover {
+    background-color: #6A00E0;
+    /* darker shade for hover effect */
+}
+
+/* styles for the shopping cart list */
+ul {
+    list-style-type: none;
+    /* remove bullet points */
+    padding: 0;
+    /* remove padding */
+}
+
+/* styles for individual list items */
+li {
+    background-color: #f9f9f9;
+    /* light background for list items */
+    padding: 10px;
+    /* internal spacing */
+    margin: 5px 0;
+    /* vertical spacing between items */
+    border: 1px solid #ddd;
+    /* light border around items */
+    border-radius: 4px;
+    /* rounded corners */
+    transition: background-color 0.3s;
+    /* smooth transition for background color */
+}
+
+/* hover effect for list items */
+li:hover {
+    background-color: #e9ecef;
+    /* change to light grey on hover */
+}
+
+/* styling for total items display */
+p {
+    font-weight: bold;
+    /* bold text */
+    text-align: center;
+    /* center-align text */
+    margin-top: 10px;
+    /* space above the paragraph */
+}
+
+/* accessibility focus styles */
+input:focus,
+button:focus,
+li:focus {
+    outline: 2px solid #7F00FF;
+    /* outline for focused elements */
+}
+
+#products img {
+    /*image resizing code*/
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}

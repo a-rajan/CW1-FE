@@ -1,0 +1,40 @@
+<!DOCTYPE html> <!--throwaway-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> <!--VUE.JS IMPORT-->
+</head>
+
+<body>
+    <div id="app">
+        <h1>My TodoList</h1>
+        <input type="text" id="newTask" v-model="newTask">
+        <button id="addButton" v-on:click="addItem">add</button>
+        <ul id="tasklist">
+            <li v-for="task in tasks">{{ task }}</li>
+        </ul>
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                newTask: '',
+                tasks: []
+            },
+            methods: {
+                addItem: function () {
+                    if (this.newTask.trim() !== '') {
+                        this.tasks.push(this.newTask);
+                        this.newTask = '';
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html> <!--to-do list task2. task3 is seperate file-->

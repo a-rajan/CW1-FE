@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--this file is now the current file/index.html . new backup copy has been created and will be binned when necessary-->
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>catchup</title> <!--webapp name/tab name-->
+    <link rel="stylesheet" href="../css/styles.css"> <!--css directory path-->
+    <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> <!-- importing -->
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{ sitename }}</h1> <!-- webapp name -->
+        <div id="products"> <!--items for sale (lessons to book)-->
+            <div v-for="lesson in lessons" :key="lesson.id"> <!-- div-creation for each arrays below: -->
+                <h2>{{ lesson.subject }}</h2> <!-- display lesson subject -->
+                <p>{{ lesson.location }}</p> <!-- display lesson location -->
+                <p>price: £{{ lesson.price }}</p> <!-- LESSON COST -->
+                <p>spaces: {{ lesson.spaces }}</p> <!-- STOCK/HOW MANY LESSONS AVAILABLE -->
+                <img :src="lesson.image" alt="lesson image"> <!-- LESSON IMAGE -->
+                <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">add to cart</button>
+                <!--ADD ALREADY-SHOWN ITEMS TO CART-->
+                <!-- add to cart button -->
+            </div>
+        </div>
+        <input type="text" v-model="newProduct" placeholder="enter product name"> <!-- TYPE PRODUCT/ITEM HERE -->
+        <button v-on:click="addProduct">add to cart</button> <!-- CLICK HERE TO SEND NEWER ITEM TO CART -->
+        <h2>shopping cart</h2>
+        <ul>
+            <li v-for="(product, index) in cart" :key="index">{{ product.subject }} <!-- loop through cart items -->
+                <button v-on:click="removeProduct(index)">x</button> <!-- button to remove product -->
+            </li>
+        </ul>
+        <p>total items in cart: {{ cart.length }}</p> <!-- display total items in cart -->
+    </div>
+
+    <script>
+        let app = new Vue({
+            el: '#app', // BINDING VUE.JS INSTANCE TO ID=APP ELEMNT
+            data: {
+                sitename: 'catchup', // WEBAPP NAME
+                newProduct: '', // CODE FOR ADDING A NEW PRODUCT/SEARCH
+                cart: [], // SHOPPING CART ARRAY
+                lessons: [ // AVAILABLE LESSONS
+                    { id: 1, subject: 'English', location: 'room G04', price: 10, spaces: 5, image: '../images/english.svg' }, // lessons + room + price + spaces + image
+                    { id: 2, subject: 'Math', location: 'room G05', price: 10, spaces: 5, image: '../images/maths.svg' }, // resize images to 100x100px
+                    { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' },
+                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/IT.svg' },
+                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/History.svg' },
+
+                ]
+            },// add more lessons as needed
+            methods: {
+                addProduct: function () {
+                    if (this.newProduct.trim() !== '') { // check if new product input is not empty
+                        this.cart.push({ subject: this.newProduct }); // add new product to cart
+                        this.newProduct = ''; // clear input field
+                    } else {
+                        alert("please enter a product name."); // alert if input is empty
+                    }
+                },
+                removeProduct: function (index) {
+                    this.cart.splice(index, 1); // remove product from cart by index
+                    // !IMPORTANT! do not get "SPLICE" and "SLICE" mixed up. "SPLICE" is for adding/removing array items (adding lessons etc.), "SLICE" is for copying array items (displaying lessons etc.)
+                },
+                addToCart: function (lesson) {
+                    if (lesson.spaces > 0) { // check if there are available spaces
+                        this.cart.push(lesson); // add lesson to cart
+                        lesson.spaces--; // delete available spaces
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
