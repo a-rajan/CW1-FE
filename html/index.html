@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>catchup</title> <!--webapp name/tab name-->
+    <title>2torial</title> <!--webapp name/tab name-->
     <link rel="stylesheet" href="../css/styles.css"> <!--css directory path-->
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> <!-- importing -->
 </head>
@@ -40,18 +40,23 @@
         let app = new Vue({
             el: '#app', // BINDING VUE.JS INSTANCE TO ID=APP ELEMNT
             data: {
-                sitename: 'catchup', // WEBAPP NAME
+                sitename: '2torial', // WEBAPP NAME
                 newProduct: '', // CODE FOR ADDING A NEW PRODUCT/SEARCH
                 cart: [], // SHOPPING CART ARRAY
                 lessons: [ // AVAILABLE LESSONS
                     { id: 1, subject: 'English', location: 'room G04', price: 10, spaces: 5, image: '../images/english.svg' }, // lessons + room + price + spaces + image
                     { id: 2, subject: 'Math', location: 'room G05', price: 10, spaces: 5, image: '../images/maths.svg' }, // resize images to 100x100px
-                    { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' },
-                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/IT.svg' },
-                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/History.svg' },
-
+                    { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' }, // image added
+                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/it.svg' }, // image added 
+                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/history.svg' }, // image added
+                    { id: 6, subject: 'Geography', location: 'room G11', price: 12, spaces: 6, image: '../images/geography.svg' }, // add image for geography-french 
+                    { id: 7, subject: 'Art', location: 'room G12', price: 18, spaces: 4, image: '../images/art.svg' },
+                    { id: 8, subject: 'Chinese', location: 'room G13', price: 10, spaces: 10, image: '../images/Chinese.svg' },
+                    { id: 9, subject: 'Music', location: 'room G14', price: 20, spaces: 5, image: '../images/music.svg' },
+                    { id: 10, subject: 'Law', location: 'room G15', price: 15, spaces: 7, image: '../images/Law.svg' }
                 ]
             },// add more lessons as needed
+            //1-10 lessons added. images to be added further down
             methods: {
                 addProduct: function () {
                     if (this.newProduct.trim() !== '') { // check if new product input is not empty

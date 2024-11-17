@@ -46,12 +46,17 @@
                 lessons: [ // AVAILABLE LESSONS
                     { id: 1, subject: 'English', location: 'room G04', price: 10, spaces: 5, image: '../images/english.svg' }, // lessons + room + price + spaces + image
                     { id: 2, subject: 'Math', location: 'room G05', price: 10, spaces: 5, image: '../images/maths.svg' }, // resize images to 100x100px
-                    { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' },
-                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/IT.svg' },
-                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/History.svg' },
-
+                    { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' }, // image added
+                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/IT.svg' }, // image added 
+                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/History.svg' }, // image added
+                    { id: 6, subject: 'Geography', location: 'room G11', price: 12, spaces: 6, image: '../images/geography.svg' }, // add image for geography-french 
+                    { id: 7, subject: 'Art', location: 'room G12', price: 18, spaces: 4, image: '../images/art.svg' },
+                    { id: 8, subject: 'Spanish', location: 'room G13', price: 10, spaces: 10, image: '../images/spanish.svg' },
+                    { id: 9, subject: 'Music', location: 'room G14', price: 20, spaces: 5, image: '../images/music.svg' },
+                    { id: 10, subject: 'French', location: 'room G15', price: 15, spaces: 7, image: '../images/french.svg' }
                 ]
             },// add more lessons as needed
+            //1-10 lessons added. images to be added further down
             methods: {
                 addProduct: function () {
                     if (this.newProduct.trim() !== '') { // check if new product input is not empty
