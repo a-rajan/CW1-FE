@@ -5,21 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2torial</title> <!--webapp name/tab name-->
+    <title>EHelp</title> <!--webapp name/tab name-->
     <link rel="stylesheet" href="../css/styles.css"> <!--css directory path-->
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> <!-- importing -->
 </head>
 
 <body>
-    <div id="app">
+    <div id="app"> <!-- APP STRUCTURE-->
         <h1>{{ sitename }}</h1> <!-- webapp name -->
         <div id="products"> <!--items for sale (lessons to book)-->
             <div v-for="lesson in lessons" :key="lesson.id"> <!-- div-creation for each arrays below: -->
+                <br>
+                <img :src="lesson.image" alt="lesson image"> <!-- LESSON IMAGE (moved this above the metadata) -->
                 <h2>{{ lesson.subject }}</h2> <!-- display lesson subject -->
                 <p>{{ lesson.location }}</p> <!-- display lesson location -->
                 <p>price: £{{ lesson.price }}</p> <!-- LESSON COST -->
                 <p>spaces: {{ lesson.spaces }}</p> <!-- STOCK/HOW MANY LESSONS AVAILABLE -->
-                <img :src="lesson.image" alt="lesson image"> <!-- LESSON IMAGE -->
                 <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">add to cart</button>
                 <!--ADD ALREADY-SHOWN ITEMS TO CART-->
                 <!-- add to cart button -->
@@ -38,9 +39,9 @@
 
     <script>
         let app = new Vue({
-            el: '#app', // BINDING VUE.JS INSTANCE TO ID=APP ELEMNT
+            el: '#app', // LESSON DATA FOR APP STRUCTURE
             data: {
-                sitename: '2torial', // WEBAPP NAME
+                sitename: 'EHelp', // WEBAPP NAME
                 newProduct: '', // CODE FOR ADDING A NEW PRODUCT/SEARCH
                 cart: [], // SHOPPING CART ARRAY
                 lessons: [ // AVAILABLE LESSONS

@@ -16,7 +16,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
-
+/*APP STYLING*/
 #app {
     background-color: white;
     padding: 20px;
@@ -28,17 +28,23 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    /* Ensure content is scrollable if it overflows */
+    /* nsure content is scrollable if it overflows */
 }
 
-h1, /* colours from line 34-63 (adjust comment later*/
-h2 {
-    color: #333;
+h1, h2, p, 
+input[type="text"], button, ul {
+    width: 100%;
+    max-width: 300px; /*spacing */
+    margin-bottom: 20px; /* element spacing*/
     text-align: center;
 }
 
+p {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+}
 input[type="text"] { /* colours for input text */
-    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -80,15 +86,32 @@ li:hover {
     background-color: #e9ecef;
 }
 
-p {
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
+/*PRODUCTS STYLING*/
+
+#products { /*structural content for products */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
-#products img { /* colours for img - prefd to put "auto" on most of the options, intending to match all devices */
-    width: auto;
-    height: auto;
-    max-height: auto;
+
+#products > div {
+    display: flex; /*flexbox for products */
+    flex-direction: column; 
+    align-items: center;
+    margin-bottom: 20px; /*spacing */
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ddd; 
+    border-radius: 8px;
+    background-color: #fff; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /*hover/shdow for products */
+}
+
+
+#products img { /* colours for img - undid the preferred action to change height & width to "auto", intended actions did not occur */
+    width: 100px; /*changed from 200px to 100px*/
+    height: 100px;
     object-fit: cover;
     border-radius: 10px;
 }
