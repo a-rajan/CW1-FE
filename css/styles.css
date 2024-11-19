@@ -16,6 +16,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
+
 /*APP STYLING*/
 #app {
     background-color: white;
@@ -28,14 +29,20 @@ body {
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-    /* nsure content is scrollable if it overflows */
+    /* ensure content is scrollable if it overflows */
 }
 
-h1, h2, p, 
-input[type="text"], button, ul {
+h1,
+h2,
+p,
+input[type="text"],
+button,
+ul {
     width: 100%;
-    max-width: 300px; /*spacing */
-    margin-bottom: 20px; /* element spacing*/
+    max-width: 300px;
+    /*spacing */
+    margin-bottom: 20px;
+    /* element spacing*/
     text-align: center;
 }
 
@@ -44,7 +51,9 @@ p {
     text-align: center;
     margin-top: 10px;
 }
-input[type="text"] { /* colours for input text */
+
+input[type="text"] {
+    /* colours for input text */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -52,7 +61,8 @@ input[type="text"] { /* colours for input text */
     font-size: 16px;
 }
 
-button { /* colours for button */
+button {
+    /* colours for button */
     width: 100%;
     padding: 10px;
     background-color: #7F00FF;
@@ -64,9 +74,11 @@ button { /* colours for button */
     transition: background-color 0.3s;
 }
 
-button:hover { /* colours for button hover */
+button:hover {
+    /* colours for button hover */
     background-color: #6A00E0;
 }
+
 /* colours for ul,li,p */
 ul {
     list-style-type: none;
@@ -88,40 +100,47 @@ li:hover {
 
 /*PRODUCTS STYLING*/
 
-#products { /*structural content for products */
+#products {
+    /*structural content for products */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
 }
 
-#products > div {
-    display: flex; /*flexbox for products */
-    flex-direction: column; 
+#products>div {
+    display: flex;
+    /*flexbox for products */
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 20px; /*spacing */
-    width: 100%; 
+    margin-bottom: 20px;
+    /*spacing */
+    width: 100%;
     padding: 10px;
-    border: 1px solid #ddd; 
+    border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #fff; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /*hover/shdow for products */
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /*hover/shadow for products */
 }
 
-
-#products img { /* colours for img - undid the preferred action to change height & width to "auto", intended actions did not occur */
-    width: 100px; /*changed from 200px to 100px*/
+#products img {
+    /* colours for img - undid the preferred action to change height & width to "auto", intended actions did not occur */
+    width: 100px;
+    /*changed from 200px to 100px*/
     height: 100px;
     object-fit: cover;
     border-radius: 10px;
 }
+
 /* colours for media queries */
 @media (max-width: 600px) {
     #app {
         padding: 10px;
     }
 
-    input[type="text"], button {
+    input[type="text"],
+    button {
         font-size: 14px;
     }
 }
