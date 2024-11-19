@@ -30,7 +30,8 @@
         <button v-on:click="addProduct">add to cart</button> <!-- CLICK HERE TO SEND NEWER ITEM TO CART -->
         <h2>shopping cart</h2>
         <ul>
-            <li v-for="(product, index) in cart" :key="index">{{ product.subject }} <!-- loop through cart items -->
+            <li v-for="(product, index) in cart" :key="index">{{ product.subject }}
+                <img :src="product.image" alt="product image"><!-- loop through cart items -->
                 <button v-on:click="removeProduct(index)">x</button> <!-- button to remove product -->
             </li>
         </ul>
@@ -67,15 +68,35 @@
                         alert("please enter a product name."); // alert if input is empty
                     }
                 },
-                removeProduct: function (index) {
-                    this.cart.splice(index, 1); // remove product from cart by index
-                    // !IMPORTANT! do not get "SPLICE" and "SLICE" mixed up. "SPLICE" is for adding/removing array items (adding lessons etc.), "SLICE" is for copying array items (displaying lessons etc.)
-                },
+
                 addToCart: function (lesson) {
-                    if (lesson.spaces > 0) { // check if there are available spaces
-                        this.cart.push(lesson); // add lesson to cart
-                        lesson.spaces--; // delete available spaces
-                    }
+                    let cartItem = this.cart.find(item => item.id === lesson.id);
+                    if (cartItem) {
+                        if (lesson.spaces > 0) {
+                            cartItem.quantity++;
+                            lesson.spaces--;
+
+                        } else {
+                            alert("no more spaces available"); // alert if no more spaces available
+                        } // quantity management
+                    } else {
+                        this.cart.push({
+                            id: lesson.id,
+                            subject: lesson.subject,
+                            image: lesson.image,
+                            quantity: 1
+
+                        }); // made changes to stack multieple quantities of an item instead of making cart length longer.
+                    } // add lesson to cart
+                    lesson.spaces--; // delete available spaces
+                },
+                removeProduct: function (index) {
+                    let cartItem = this.cart[index];
+                    let lesson = this.lessons.find(item => item.id === cartItem.id);
+                    lessons.spaces += cartItem.quantity;
+                    this.cart.splice(index, 1); // PLEASE MAKE SURE THIS IS STILL WITHIN METHODS/ 
+                    // remove product from cart by index - also removes quantity
+                    // !IMPORTANT! do not get "SPLICE" and "SLICE" mixed up. "SPLICE" is for adding/removing array items (adding lessons etc.), "SLICE" is for copying array items (displaying lessons etc.)
                 }
             }
         });

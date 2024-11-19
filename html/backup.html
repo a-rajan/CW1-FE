@@ -5,21 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>catchup</title> <!--webapp name/tab name-->
+    <title>EHelp</title> <!--webapp name/tab name-->
     <link rel="stylesheet" href="../css/styles.css"> <!--css directory path-->
     <script src="https://unpkg.com/vue@2.7.8/dist/vue.js"></script> <!-- importing -->
 </head>
 
 <body>
-    <div id="app">
+    <div id="app"> <!-- APP STRUCTURE-->
         <h1>{{ sitename }}</h1> <!-- webapp name -->
         <div id="products"> <!--items for sale (lessons to book)-->
             <div v-for="lesson in lessons" :key="lesson.id"> <!-- div-creation for each arrays below: -->
+                <br>
+                <img :src="lesson.image" alt="lesson image"> <!-- LESSON IMAGE (moved this above the metadata) -->
                 <h2>{{ lesson.subject }}</h2> <!-- display lesson subject -->
                 <p>{{ lesson.location }}</p> <!-- display lesson location -->
                 <p>price: £{{ lesson.price }}</p> <!-- LESSON COST -->
                 <p>spaces: {{ lesson.spaces }}</p> <!-- STOCK/HOW MANY LESSONS AVAILABLE -->
-                <img :src="lesson.image" alt="lesson image"> <!-- LESSON IMAGE -->
                 <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">add to cart</button>
                 <!--ADD ALREADY-SHOWN ITEMS TO CART-->
                 <!-- add to cart button -->
@@ -29,7 +30,8 @@
         <button v-on:click="addProduct">add to cart</button> <!-- CLICK HERE TO SEND NEWER ITEM TO CART -->
         <h2>shopping cart</h2>
         <ul>
-            <li v-for="(product, index) in cart" :key="index">{{ product.subject }} <!-- loop through cart items -->
+            <li v-for="(product, index) in cart" :key="index">{{ product.subject }}
+                <img src="{{product.image}}"><!-- loop through cart items -->
                 <button v-on:click="removeProduct(index)">x</button> <!-- button to remove product -->
             </li>
         </ul>
@@ -38,22 +40,22 @@
 
     <script>
         let app = new Vue({
-            el: '#app', // BINDING VUE.JS INSTANCE TO ID=APP ELEMNT
+            el: '#app', // LESSON DATA FOR APP STRUCTURE
             data: {
-                sitename: 'catchup', // WEBAPP NAME
+                sitename: 'EHelp', // WEBAPP NAME
                 newProduct: '', // CODE FOR ADDING A NEW PRODUCT/SEARCH
                 cart: [], // SHOPPING CART ARRAY
                 lessons: [ // AVAILABLE LESSONS
                     { id: 1, subject: 'English', location: 'room G04', price: 10, spaces: 5, image: '../images/english.svg' }, // lessons + room + price + spaces + image
                     { id: 2, subject: 'Math', location: 'room G05', price: 10, spaces: 5, image: '../images/maths.svg' }, // resize images to 100x100px
                     { id: 3, subject: 'Science', location: 'room G09', price: 15, spaces: 3, image: '../images/science.svg' }, // image added
-                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/IT.svg' }, // image added 
-                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/History.svg' }, // image added
+                    { id: 4, subject: 'IT', location: 'room G08', price: 20, spaces: 8, image: '../images/it.svg' }, // image added 
+                    { id: 5, subject: 'History', location: 'room G10', price: 15, spaces: 8, image: '../images/history.svg' }, // image added
                     { id: 6, subject: 'Geography', location: 'room G11', price: 12, spaces: 6, image: '../images/geography.svg' }, // add image for geography-french 
                     { id: 7, subject: 'Art', location: 'room G12', price: 18, spaces: 4, image: '../images/art.svg' },
-                    { id: 8, subject: 'Spanish', location: 'room G13', price: 10, spaces: 10, image: '../images/spanish.svg' },
+                    { id: 8, subject: 'Chinese', location: 'room G13', price: 10, spaces: 10, image: '../images/Chinese.svg' },
                     { id: 9, subject: 'Music', location: 'room G14', price: 20, spaces: 5, image: '../images/music.svg' },
-                    { id: 10, subject: 'French', location: 'room G15', price: 15, spaces: 7, image: '../images/french.svg' }
+                    { id: 10, subject: 'Law', location: 'room G15', price: 15, spaces: 7, image: '../images/Law.svg' }
                 ]
             },// add more lessons as needed
             //1-10 lessons added. images to be added further down
