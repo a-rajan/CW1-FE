@@ -93,21 +93,55 @@ let app = new Vue({
                 }
             }, 300); // 300ms wait time before searching
         },
-                // method to sort by price
-                sortPrice: function () {
-                    this.sortLessons('price');
-                },
-        
-                // method to sort by spaces
-                sortSpaces: function () {
-                    this.sortLessons('spaces');
-                },
-        
-                // method to sort alphabetically by subject
-                sortAlphabetical: function () {
-                    this.sortLessons('subject');
-                },
-        
+
+        // method to sort by price
+        sortPrice: function () {
+            this.sortLessons('price');
+        },
+
+        // method to sort by spaces
+        sortSpaces: function () {
+            this.sortLessons('spaces');
+        },
+
+        // method to sort by location
+        sortLocation: function () {
+            this.sortLessons('location');
+        },
+
+        // method to sort alphabetically by subject
+        sortAlphabetical: function () {
+            this.sortLessons('subject');
+        },
+
+        //overall/master sorting code, supporting lesson space, lesson price, and lesson title sorting
+        sortLessons: function (attribute) {
+            const order = this.sortOrder; // get current sort order
+
+            this.displayedLessons.sort((a, b) => { // sort lessons based on attribute
+                let comparison = 0; // default comparison value
+
+                let aValue = a[attribute]; // get value of attribute
+                let bValue = b[attribute];
+
+                // case sensitive string sorting
+                if (typeof aValue === 'string' && typeof bValue === 'string') {
+                    aValue = aValue.toLowerCase();
+                    bValue = bValue.toLowerCase();
+                }
+
+                if (aValue < bValue) {
+                    comparison = -1;
+                } else if (aValue > bValue) {
+                    comparison = 1;
+                }
+
+                return comparison * (order === 'asc' ? 1 : -1);
+            });
+
+            // toggle sort order for next click
+            this.sortOrder = this.sortOrder === 'asc' ? 'desc' : 'asc';
+        }
     },
     computed: { //post-production/finalised(?) cart data.
         totalCartItems: function () { // total number of items in the cart

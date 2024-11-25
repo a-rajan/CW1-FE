@@ -16,11 +16,17 @@
         <!-- Search Functionality -->
         <input type="text" v-model="searchQuery" @input="performSearch" placeholder="Search for lessons...">
         <!-- SEARCH INPUT -->
-        <div id="sorting"> <!--sorting items-->
-            <button v-on:click="sortPrice">Sort by price</button> <!-- sort by price button -->
-            <button v-on:click="sortSpaces">Sort by spaces</button> <!-- sort by spaces button --> 
-            <button v-on:click="sortAlphabetical">Sort by alphabetical order</button> <!-- sort by alphabetical order button -->
+        <div id="sorting">
+            <button v-on:click="sortPrice">Sort by price</button> 
+            <!-- sort by price button -->
+            <button v-on:click="sortSpaces">Sort by spaces</button> 
+            <!-- sort by spaces button -->
+            <button v-on:click="sortAlphabetical">Sort by alphabetical order</button>
+            <!-- sort by alphabetical order button -->
+            <button v-on:click="sortLocation">Sort by location</button> <!-- sort by location button -->
         </div>
+
+
         <div id="products"> <!--items for sale (lessons to book)-->
             <div v-for="lesson in displayedLessons" :key="lesson.id"> <!-- div-creation for each arrays below: -->
                 <br>
