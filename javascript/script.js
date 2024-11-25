@@ -92,7 +92,22 @@ let app = new Vue({
                     vm.displayedLessons = vm.lessons; // If search input is empty, display all lessons
                 }
             }, 300); // 300ms wait time before searching
-        }
+        },
+                // method to sort by price
+                sortPrice: function () {
+                    this.sortLessons('price');
+                },
+        
+                // method to sort by spaces
+                sortSpaces: function () {
+                    this.sortLessons('spaces');
+                },
+        
+                // method to sort alphabetically by subject
+                sortAlphabetical: function () {
+                    this.sortLessons('subject');
+                },
+        
     },
     computed: { //post-production/finalised(?) cart data.
         totalCartItems: function () { // total number of items in the cart
