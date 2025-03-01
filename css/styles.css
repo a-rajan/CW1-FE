@@ -1,23 +1,26 @@
-/*rewrote full css,after trial and error to spot an critical flaw.*/
+/*css. regularly check this to ensure compatibility with rest of files.*/
+
+/*default*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/*background colour + fonts + ensure device fitting etc*/
 html,
 body {
-    height: auto;
+    height: 100%;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    /* content starts from the top and doesn't go missing*/
+    /* content starts from the top and doesn't go missing */
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
-/*APP STYLING*/
+/*app styling*/
 #app {
     background-color: white;
     padding: 20px;
@@ -32,6 +35,7 @@ body {
     /* ensure content is scrollable if it overflows */
 }
 
+/* applies to h1, h2, p, input, button & ul */
 h1,
 h2,
 p,
@@ -40,9 +44,9 @@ button,
 ul {
     width: 100%;
     max-width: 300px;
-    /*spacing */
+    /* spacing */
     margin-bottom: 20px;
-    /* element spacing*/
+    /* element spacing */
     text-align: center;
 }
 
@@ -52,8 +56,8 @@ p {
     margin-top: 10px;
 }
 
+/*font colour*/
 input[type="text"] {
-    /* colours for input text */
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -61,8 +65,8 @@ input[type="text"] {
     font-size: 16px;
 }
 
+/*colours for button*/
 button {
-    /* colours for button */
     width: 100%;
     padding: 10px;
     background-color: #7F00FF;
@@ -74,34 +78,178 @@ button {
     transition: background-color 0.3s;
 }
 
+/*colours for button hover*/
 button:hover {
-    /* colours for button hover */
     background-color: #6A00E0;
 }
 
-/* colours for ul,li,p */
+/*colours for ul, li, p*/
 ul {
     list-style-type: none;
     padding: 0;
 }
 
+/*cart item styling*/
 li {
     background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
+    padding: 15px;
+    margin: 10px 0;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: background-color 0.3s;
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 8px;
+    align-items: start;
 }
 
 li:hover {
     background-color: #e9ecef;
 }
 
-/*PRODUCTS STYLING*/
+/*cart item detail container*/
+.cart-item-details {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+}
 
+/*cart image styling*/
+.cart-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    grid-row: span 3;
+    /*span all rows in the grid*/
+    align-self: center;
+}
+
+/*product title*/
+.product-title {
+    font-weight: bold;
+    margin: 0;
+}
+
+/*quantity controls styling*/
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /*more consistent spacing*/
+    margin: 5px 0;
+}
+
+.quantity-controls button {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    /*prevent shrinking*/
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.quantity-controls span {
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}
+
+/*remove button styling*/
+.remove-btn {
+    background-color: #ff4444;
+    width: auto;
+    height: 28px;
+    padding: 0 8px;
+    margin-left: auto;
+    /*push to right*/
+    font-size: 12px;
+}
+
+/*subtotal styling*/
+.subtotal {
+    font-weight: bold;
+    margin: 5px 0 0 0;
+}
+
+/*consistent form styling*/
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+label {
+    text-align: left;
+    margin-bottom: 2px;
+}
+
+/*error message styling*/
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+/*popup styles*/
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*consistent popup content*/
+.popup-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    max-height: 80vh;
+    /*limit height to 80% of viewport*/
+    width: 100%;
+    overflow-y: auto;
+    /*enable scrolling*/
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/*improved popup scrolling*/
+.popup-content {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 25px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/*products styling*/
 #products {
-    /*structural content for products */
+    /*structural content for products*/
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,30 +258,197 @@ li:hover {
 
 #products>div {
     display: flex;
-    /*flexbox for products */
+    /*flexbox for products*/
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
-    /*spacing */
+    /*spacing*/
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /*hover/shadow for products */
+    /*hover/shadow for products*/
 }
 
 #products img {
-    /* colours for img - undid the preferred action to change height & width to "auto", intended actions did not occur */
+    /*colours for img + attempting to give a uniformed size to all imgs*/
     width: 100px;
-    /*changed from 200px to 100px*/
     height: 100px;
     object-fit: cover;
     border-radius: 10px;
 }
 
-/* colours for media queries */
+/*consistent checkout button*/
+.checkout-button {
+    margin-top: 10px;
+}
+
+.success-message {
+    /*success message styling*/
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/*empty cart message*/
+.empty-cart-message {
+    margin: 20px 0;
+    color: #777;
+}
+
+/*cart item layout*/
+.cart-items {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/*individual cart item*/
+.cart-item {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    grid-gap: 10px;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/*cart item image container*/
+.cart-item-image {
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*cart item title*/
+.cart-item-title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/*cart item price*/
+.cart-item-price {
+    color: #7F00FF;
+    font-weight: 500;
+}
+
+/*quantity button*/
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*quantity display*/
+.quantity-display {
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+}
+
+/*cart summary*/
+.cart-summary {
+    width: 100%;
+    max-width: 300px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+    margin: 15px 0;
+    text-align: center;
+}
+
+/*checkout form*/
+.checkout-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+/*form group*/
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/*labels*/
+.form-group label {
+    margin-bottom: 5px;
+}
+
+/*order success styling*/
+.order-success {
+    background-color: #e7f7e7;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    text-align: center;
+    width: 100%;
+}
+
+/*sorting controls container*/
+.sorting-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/*sort group styling*/
+.sort-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 140px;
+}
+
+/*sort group label*/
+.sort-group label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/*sort select styling*/
+.sort-select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/*sort select hover effect*/
+.sort-select:hover {
+    border-color: #7F00FF;
+}
+
+/*sort select focus effect*/
+.sort-select:focus {
+    outline: none;
+    border-color: #7F00FF;
+    box-shadow: 0 0 0 2px rgba(127, 0, 255, 0.2);
+}
+
+
+
+/*colours for media queries*/
 @media (max-width: 600px) {
     #app {
         padding: 10px;

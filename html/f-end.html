@@ -1,0 +1,126 @@
+<!DOCTYPE html> <!--DOCTYPE declaration-->
+<html lang="en"> <!--language-->
+
+<head> <!--head section-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EHelp</title> <!--webapp name/tab name-->
+    <link rel="stylesheet" href="../css/styles.css"> <!--css directory path-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script> <!-- importing -->
+</head>
+
+<body> <!--body section-->
+    <div id="app"> <!-- APP STRUCTURE-->
+        <h1>{{ sitename }}</h1> <!-- webapp name -->
+
+        <!-- SEARCH INPUT -->
+        <input type="text" v-model="searchQuery" @input="performSearch" placeholder="Search for lessons..."
+            aria-label="Search for lessons">
+
+        <!-- SORTING FUNCTIONALITY -->
+        <div class="sorting-controls"> <!--sorting controls container-->
+            <div class="sort-group"> <!--sort by group-->
+                <label for="sortBy">Sort by:</label> <!--sort by label-->
+                <select id="sortBy" v-model="sortBy" @change="sortLessons" class="sort-select"> <!--sort by dropdown-->
+                    <option value="subject">Subject</option> <!--sort by subject-->
+                    <option value="location">Location</option> <!--sort by location-->
+                    <option value="price">Price</option> <!--sort by price--> 
+                    <option value="spaces">Spaces</option> <!--sort by spaces-->
+                </select>
+            </div>
+
+            <div class="sort-group"> <!--sort order group-->
+                <label for="sortOrder">Order:</label> <!--sort order label-->
+                <select id="sortOrder" v-model="sortOrder" @change="sortLessons" class="sort-select"> <!--sort order dropdown-->
+                    <option value="asc">Ascending</option> <!--ascending order-->
+                    <option value="desc">Descending</option> <!--descending order-->
+                </select>
+            </div>
+        </div>
+
+        <!-- LESSONS DISPLAY -->
+        <div id="products"> <!-- product display -->
+            <div v-for="lesson in displayedLessons" :key="lesson.id"> <!--lesson display format-->
+                <br> <!--line break-->
+                <img :src="lesson.image" alt="lesson image"> <!--lesson image-->
+                <h2>{{ lesson.subject }}</h2> <!--lesson subject-->
+                <p>{{ lesson.location }}</p> <!--lesson location-->
+                <p>price: £{{ lesson.price }}</p> <!--lesson price-->
+                <p>spaces: {{ lesson.spaces }}</p> <!--lesson spaces-->
+                <button v-on:click="addToCart(lesson)" :disabled="lesson.spaces === 0">add to cart</button>
+                <!--add to cart button-->
+            </div>
+        </div>
+
+        <!-- SHOPPING CART BUTTON -->
+        <button v-on:click="toggleCartPopup" :disabled="cart.length === 0"> <!--cart button-->
+            View Cart {{ cart.length > 0 ? '(' + totalCartItems + ')' : '' }} <!--show cart item count-->
+        </button>
+
+        <!-- SHOPPING CART POPUP -->
+        <div v-if="isCartPopupVisible" class="popup" @click="closePopupOnOutsideClick"> <!--popup container-->
+            <div class="popup-content" @click.stop> <!--popup content-->
+                <span class="close" v-on:click="toggleCartPopup">&times;</span> <!--close button-->
+                <h2>Shopping Cart</h2> <!--cart title-->
+                
+                <!-- EMPTY CART MESSAGE -->
+                <p v-if="cart.length === 0" class="empty-cart-message">Your cart is empty</p> <!--empty cart message-->
+                
+                <!-- CART ITEMS LIST -->
+                <ul v-if="cart.length > 0" class="cart-items"> <!--cart items container-->
+                    <li v-for="(product, index) in cart" :key="index" class="cart-item"> <!--individual cart item-->
+                        <div class="cart-item-image"> <!--image container-->
+                            <img :src="product.image" alt="product image" class="cart-image"> <!--item image-->
+                        </div>
+                        <div class="cart-item-details"> <!--details container-->
+                            <div class="cart-item-title">{{ product.subject }}</div> <!--item title-->
+                            <div class="cart-item-price">£{{ product.price }}</div> <!--item price-->
+                            <div class="quantity-controls"> <!--quantity control buttons-->
+                                <button v-on:click="decreaseQuantity(index)" class="quantity-btn">-</button> <!--decrease quantity-->
+                                <span class="quantity-display">{{ product.quantity }}</span> <!--quantity display-->
+                                <button v-on:click="increaseQuantity(index)" class="quantity-btn">+</button> <!--increase quantity-->
+                                <button v-on:click="removeProduct(index)" class="remove-btn">×</button> <!--remove item-->
+                            </div>
+                            <div class="subtotal">Subtotal: £{{ product.price * product.quantity }}</div> <!--item subtotal-->
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- CART SUMMARY -->
+                <div v-if="cart.length > 0" class="cart-summary"> <!--cart summary section-->
+                    <p>Total items: {{ totalCartItems }}</p> <!--total items-->
+                    <p>Total price: £{{ totalPrice }}</p> <!--total price-->
+                </div>
+
+                <!-- CHECKOUT FORM -->
+                <h2>Checkout</h2> <!--checkout heading-->
+                <form @submit.prevent="checkout" class="checkout-form"> <!--checkout form-->
+                    <div class="form-group"> <!--name form group-->
+                        <label for="name">Name:</label> <!--name label-->
+                        <input type="text" v-model="name" id="name" required> <!--name input-->
+                        <span v-if="nameError" class="error">{{ nameError }}</span> <!--name error-->
+                    </div>
+                    
+                    <div class="form-group"> <!--phone form group-->
+                        <label for="phone">Phone:</label> <!--phone label-->
+                        <input type="text" v-model="phone" id="phone" required> <!--phone input-->
+                        <span v-if="phoneError" class="error">{{ phoneError }}</span> <!--phone error-->
+                    </div>
+                    
+                    <button type="submit" :disabled="!isCheckoutValid || cart.length === 0" class="checkout-button">
+                        Checkout <!--checkout button-->
+                    </button>
+                </form>
+                
+                <!-- ORDER CONFIRMATION -->
+                <div v-if="orderSubmitted" class="order-success"> <!--success container-->
+                    <p class="success-message">Order submitted successfully!</p> <!--success text-->
+                    <p>Thank you for your purchase.</p> <!--thank you message-->
+                </div> 
+            </div> <!--end of popup content-->
+        </div> 
+    </div> <!--end of app-->
+    <script src="../javascript/script.js"></script> <!-- importing -->
+</body> 
+
+</html>
