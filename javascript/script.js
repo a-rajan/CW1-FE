@@ -14,7 +14,7 @@ let app = new Vue({ // vuejs app
         nameError: '',
         phoneError: '',
         isCartPopupVisible: false, // cart popup is not visible by default
-        apiUrl: 'http://localhost:3000' // local api url - change when deployed
+        apiUrl: 'https://cw1-be.onrender.com' // post-render url change
     },
     methods: {
         // fetch lessons from backend api
