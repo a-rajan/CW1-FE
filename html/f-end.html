@@ -42,7 +42,7 @@
         <div id="products"> <!-- product display -->
             <div v-for="lesson in displayedLessons" :key="lesson.id"> <!--lesson display format-->
                 <br> <!--line break-->
-                <img :src="lesson.image" alt="lesson image"> <!--lesson image-->
+                <img :src="apiUrl + lesson.image" alt="lesson image"> <!--lesson image-->
                 <h2>{{ lesson.subject }}</h2> <!--lesson subject-->
                 <p>{{ lesson.location }}</p> <!--lesson location-->
                 <p>price: £{{ lesson.price }}</p> <!--lesson price-->
@@ -70,7 +70,7 @@
                 <ul v-if="cart.length > 0" class="cart-items"> <!--cart items container-->
                     <li v-for="(product, index) in cart" :key="index" class="cart-item"> <!--individual cart item-->
                         <div class="cart-item-image"> <!--image container-->
-                            <img :src="product.image" alt="product image" class="cart-image"> <!--item image-->
+                            <img :src="apiUrl + product.image" alt="product image" class="cart-image"> <!--item image-->
                         </div>
                         <div class="cart-item-details"> <!--details container-->
                             <div class="cart-item-title">{{ product.subject }}</div> <!--item title-->
